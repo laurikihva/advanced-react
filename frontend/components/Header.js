@@ -32,7 +32,7 @@ const StyledHeader = styled.header`
         justify-content: space-between;
         align-items: stretch;
 
-        @media (min-width: 1300px) {
+        @media (max-width: 1300px) {
             grid-template-columns: 1fr;
             justify-content: center;
         }
@@ -41,7 +41,7 @@ const StyledHeader = styled.header`
     .sub-bar {
         display: grid;
         grid-template-columns: 1fr auto;
-        border-bottom: 1px solid ${props => props.theme.lightGrey};
+        border-bottom: 1px solid ${props => props.theme.lightgrey};
     }
 `;
 
