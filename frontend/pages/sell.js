@@ -4,9 +4,6 @@ const Sell = props => {
     return (
         <div>
             <p>Sell!</p>
-            <Link href="/">
-                <a>Go back to Home!</a>
-            </Link>
         </div>
     );
 }
