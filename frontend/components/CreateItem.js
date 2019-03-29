@@ -46,9 +46,9 @@ export default class CreateItem extends React.Component {
     }
 
     uploadFile = async (event) => {
-        console.log('uploading file...');
         const files = event.target.files;
         const data = new FormData();
+
         data.append('file', files[0]);
         data.append('upload_preset', 'sickfits');
 
@@ -57,7 +57,6 @@ export default class CreateItem extends React.Component {
             body: data,
         });
         const file = await res.json();
-        console.log(file);
 
         this.setState({
             image: file.secure_url,

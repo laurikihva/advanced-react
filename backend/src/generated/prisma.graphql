@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/lauri-756b0d/sick-fits/dev
-# timestamp: Mon Mar 18 2019 23:01:53 GMT+0200 (Eastern European Standard Time)
+# timestamp: Fri Mar 29 2019 23:50:19 GMT+0200 (Eastern European Standard Time)
 
 type AggregateItem {
   count: Int!
@@ -38,6 +38,7 @@ type ItemConnection {
 }
 
 input ItemCreateInput {
+  id: ID
   title: String!
   description: String!
   image: String
@@ -505,6 +506,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   name: String!
   email: String!
 }
