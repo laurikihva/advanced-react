@@ -1,6 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import PropTypes from 'prop-types';
 
 import Error from './ErrorMessage';
 import Table from './styles/Table';
@@ -39,12 +40,12 @@ const Permissions = props => (
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                {possiblePermissions.map(permission => <th>{permission}</th>)}
+                                {possiblePermissions.map((permission, i) => <th key={i}>{permission}</th>)}
                                 <th />
                             </tr>
                         </thead>
                         <tbody>
-                            {data.users.map(user => <User user={user} />)}
+                            {data.users.map((user, i) => <UserPermissions key={i} user={user} />)}
                         </tbody>
                     </Table>
                 </div>
@@ -53,7 +54,35 @@ const Permissions = props => (
     </Query>
 );
 
-class User extends React.Component {
+class UserPermissions extends React.Component {
+    static propTypes = {
+        user: PropTypes.shape({
+            name: PropTypes.string,
+            email: PropTypes.string,
+            id: PropTypes.string,
+            permissions: PropTypes.array,
+        }).isRequired,
+    };
+
+    state = {
+        permissions: this.props.user.permissions,
+    }
+
+    handlePermissionChange = (e) => {
+        const checkbox = e.target;
+        let updatedPermissions = [...this.state.permissions];
+
+        if (checkbox.checked) {
+            updatedPermissions.push(checkbox.value);
+        } else {
+            updatedPermissions = updatedPermissions.filter(permission => permission !== checkbox.value);
+        }
+
+        this.setState({
+            permissions: updatedPermissions,
+        });
+    }
+
     render() {
         const user = this.props.user;
 
@@ -61,12 +90,15 @@ class User extends React.Component {
             <tr>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                {possiblePermissions.map(permission => (
-                    <td>
+                {possiblePermissions.map((permission, i) => (
+                    <td key={i}>
                         <label htmlFor={`${user.id}-permission-${permission}`}>
                             <input
                                 id={`${user.id}-permission-${permission}`}
                                 type="checkbox"
+                                checked={this.state.permissions.includes(permission)}
+                                value={permission}
+                                onChange={this.handlePermissionChange}
                             />
                         </label>
                     </td>
