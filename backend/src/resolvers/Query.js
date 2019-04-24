@@ -50,6 +50,20 @@ const Query = {
 
         // 4. Return the order
         return order;
+    },
+
+    orders(parent, args, ctx, info) {
+        const { userId } = ctx.request;
+
+        if (!userId) {
+            throw new Error('You must be signed in!');
+        }
+
+        return ctx.db.query.orders({
+            where: {
+                user: { id: userId },
+            },
+        }, info);
     }
 };
 
