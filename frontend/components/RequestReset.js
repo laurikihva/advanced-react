@@ -13,7 +13,7 @@ const REQUEST_RESET_MUTATION = gql`
     }
 `;
 
-export default class Signin extends React.Component {
+export default class RequestReset extends React.Component {
     state = {
         email: ''
     }
@@ -30,7 +30,7 @@ export default class Signin extends React.Component {
             >
                 {(reset, { error, loading, called }) => {
                     return (
-                        <Form method="post" onSubmit={async event => {
+                        <Form method="post" data-test="request" onSubmit={async event => {
                             event.preventDefault();
 
                             await reset();
