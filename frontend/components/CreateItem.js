@@ -68,7 +68,7 @@ export default class CreateItem extends React.Component {
         return (
             <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
                 {(createItem, { loading, error }) => (
-                    <Form onSubmit={async event => {
+                    <Form data-test="createItem" onSubmit={async event => {
                         event.preventDefault();
 
                         const res = await createItem();
