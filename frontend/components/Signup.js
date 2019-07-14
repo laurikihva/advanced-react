@@ -18,8 +18,8 @@ const SIGNUP_MUTATION = gql`
 
 export default class Signup extends React.Component {
     state = {
-        name: '',
         email: '',
+        name: '',
         password: '',
     }
 
